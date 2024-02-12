@@ -1,0 +1,54 @@
+
+
+        .font_arvo {
+            font-family: 'Arvo', serif;
+            font-style: italic;
+            font-weight: 700;
+            white-space: nowrap;
+            text-align: center;
+            margin: 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        #navbar-left {
+            margin-right: auto; /* Push the date input to the left */
+        }
+
+        .add-button {
+            margin-left: auto; /* Push the button to the right */
+        }
+        #datePicker {
+            border: 2px solid #0f0f0f; /* Add border styling to the date input */
+            border-radius: 5px;
+        }
+        
+        h1 {
+            margin-left: 500px;
+        }
+        .form-control {
+            width: 110px;
+        }
+    
+        .small-button {
+            padding: 4px 8px;
+        }
+    
+        .flex-container {
+            display: flex;
+            align-items: center;
+        }
+    
+        .ticket-input {
+            width: 30px;
+        }
+    
+        /* Add left margin to move the table to the left */
+        .table-container {
+            margin-left: -100px; /* Adjust the value as needed */
+        }

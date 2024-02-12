@@ -1,0 +1,39 @@
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+ /* Adjust according to your logo size */
+    width: 150px;
+    height: 150px;
+    margin-left: 30px;
+}
+
+h1 {
+    margin-left: 100px;
+}
+
+.menu button {
+   display: block;
+   width: 200px; /* Adjust according to your preference */
+   padding: 10px;
+   margin-bottom: 5px; 
+   background-color: lightblue; 
+   border:none;
+}
+
+.font_arvo {
+    font-family: 'Arvo', serif;
+    font-style: italic;
+    font-weight: 700;
+    white-space: nowrap; /* Prevent line breaks */
+    text-align: center; /* Adjust according to your preference */
+    margin: 0; /* Reset margin to remove default spacing */
+}
+

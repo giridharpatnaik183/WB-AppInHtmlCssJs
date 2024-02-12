@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="VehicleEntry&ExitStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .form-control {
+            width: 110px;
+        }
+
+        .small-button {
+            padding: 4px 8px;
+        }
+
+        .flex-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .ticket-input {
+            width: 30px;
+        }
+        .table-container table {
+        margin-left: -40px; /* Adjust the value as needed */
+    }
+    </style>
+</head>
+<body>
+
+    <div class="container mx-auto px-4 table-container">
+        <div class="header-content">
+            <h1 class="col-md-3 font_arvo">Weighbridge Management System (Vehicle Entry and Exit)</h1>
+        </div>
+        <div class="header-content">
+            <div id="navbar-left">
+                <input type="date" id="datePicker" onchange="fetchData()">
+            </div>
+            <button class="bg-blue-500 text-white px-2 py-1 rounded small-button" onclick="addRow()">+ Add</button>
+        </div>
+        
+        <table id="dataTable" class="w-full border-collapse">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="border px-4 py-2 ticket-input">Ticket no.</th>
+                    <th class="border px-4 py-2">In Time</th>
+                    <th class="border px-4 py-2">Out Time</th>
+                    <th class="border px-4 py-2">Truck no.</th>
+                    <th class="border px-4 py-2">Product</th>
+                    <th class="border px-4 py-2">PO no.</th>
+                    <th class="border px-4 py-2">Challan no.</th>
+                    <th class="border px-4 py-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="ticketNumberCell" class="border px-4 py-2 ticket-input">
+                        <input type="text" class="form-control" value="" readonly>
+                    </td>                    
+                    <td class="border px-4 py-2"><input type="text" class="form-control in-time" value=""></td>
+                    <td class="border px-4 py-2"><input type="text" class="form-control out-time" value=""></td>
+                    <td class="border px-4 py-2"><input type="text" class="form-control" value=""></td>
+                    <td class="border px-4 py-2"><input type="text" class="form-control" value=""></td>
+                    <td class="border px-4 py-2"><input type="text" class="form-control" value=""></td>
+                    <td class="border px-4 py-2"><input type="text" class="form-control" value=""></td>
+                    <td class="border px-4 py-2">
+                        <div class="flex-container">
+                            <button class="bg-green-500 text-white px-2 py-1 rounded small-button" onclick="handleInClick(this)">In</button>
+                            <button class="bg-red-500 text-white px-2 py-1 rounded small-button ml-2" onclick="handleOutClick(this)">Out</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+   
+   
+    <script>
+        var ticketNumber = 1; // Initialize ticket number
+    
+        document.addEventListener("DOMContentLoaded", function () {
+            addTicketNumberToRow(); // Add ticket number to the initial row
+            addRow(); // Add the initial row with ticket number 2
+            addClickEventToTicketNumbers(); // Add click event to ticket numbers
+        });
+    
+        function addTicketNumberToRow() {
+            var table = document.getElementById("dataTable");
+            var firstRow = table.rows[1];
+            var ticketNumberCell = firstRow.querySelector('.ticket-input');
+            var ticketNumberInput = ticketNumberCell.querySelector('.form-control');
+    
+            // Set the ticket number for the first row
+            ticketNumberInput.value = ticketNumber++;
+            ticketNumberInput.readOnly = true; // Make ticket number non-editable
+        }
+    
+        function addRow() {
+            var table = document.getElementById("dataTable");
+            var newRow = table.rows[1].cloneNode(true);
+            var inputs = newRow.getElementsByTagName("input");
+    
+            // Set and then increment the ticket number
+            inputs[0].value = ticketNumber++;
+            inputs[0].readOnly = true; // Make ticket number non-editable
+    
+            // Clear other input values
+            for (var i = 1; i < inputs.length; i++) {
+                inputs[i].value = "";
+            }
+    
+            table.getElementsByTagName('tbody')[0].appendChild(newRow);
+            addClickEventToTicketNumbers(); // Add click event to new ticket numbers
+        }
+    
+        function addClickEventToTicketNumbers() {
+            var ticketNumberCells = document.querySelectorAll('.ticket-input');
+            ticketNumberCells.forEach(function(cell) {
+                cell.addEventListener('click', function() {
+                    window.location.href = 'gateentry.html'; // Replace with the correct path to gateentry.html
+                });
+            });
+        }
+    
+        function handleOutClick(button) {
+            var currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+            var outInput = button.parentNode.parentNode.parentNode.querySelector('.out-time');
+            outInput.value = currentTime;
+        }
+    
+        function handleInClick(button) {
+            var currentTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+            var inInput = button.parentNode.parentNode.parentNode.querySelector('.in-time');
+            inInput.value = currentTime;
+        }
+    
+        function fetchData() {
+            var selectedDate = document.getElementById("datePicker").value;
+            // Perform data fetching based on the selected date
+            console.log("Fetching data for date:", selectedDate);
+        }
+    </script>
+    
+    
+    
+    
+    
+</body>
+</html>
